@@ -27,7 +27,7 @@ function LoginForm() {
     const options = {
       method: "POST",
       headers: {
-        "Content-Type": "application.json",
+        "Content-Type": "application/json",
         "X-CSRFToken": Cookies.get("csrftoken"),
       },
       body: JSON.stringify(user),
@@ -74,7 +74,7 @@ function LoginForm() {
         />
       </Form.Group>
       <Button variant="primary" type="submit">
-        Submit
+        Login
       </Button>
     </Form>
   );
