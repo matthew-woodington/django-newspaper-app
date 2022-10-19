@@ -1,5 +1,6 @@
 from email.policy import default
 from tokenize import blank_re
+from unicodedata import category
 from django.db import models
 from django.conf import settings
 
@@ -14,6 +15,22 @@ class Article(models.Model):
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
+
+    GENERAL = 'GR'
+    SPORTS = 'SP'
+    GAMING = 'GM'
+    FOOD = 'FD'
+    CATEGORY_CHOICES = [
+        (GENERAL, 'General'),
+        (SPORTS, 'Sports'),
+        (GAMING, 'Gaming'),
+        (FOOD, 'Food'),
+    ]
+    category = models.CharField(
+        max_length=2,
+        choices=CATEGORY_CHOICES,
+        default=GENERAL,
+    )
 
     def __str__(self):
         return self.title
