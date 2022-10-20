@@ -2,13 +2,17 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+///
+import { useNavigate, Link } from "react-router-dom";
 
-function LoginForm() {
+function LoginForm({ superState, setSuperState }) {
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -38,11 +42,14 @@ function LoginForm() {
     } else {
       const data = await response.json();
       Cookies.set("Authorization", `Token ${data.key}`);
+      navigate("/");
+      setSuperState({ ...superState, auth: true, admin: data.is_superuser, authorID: data.id });
     }
   };
 
   return (
     <Form onSubmit={handleSubmit}>
+      <h1>Login</h1>
       <Form.Group className="mb-3" controlId="username">
         <Form.Label>Username</Form.Label>
         <Form.Control
@@ -76,6 +83,9 @@ function LoginForm() {
       <Button variant="primary" type="submit">
         Login
       </Button>
+      <p>
+        Don't have an account? Click <Link to={"/register"}>here</Link> to create one.
+      </p>
     </Form>
   );
 }

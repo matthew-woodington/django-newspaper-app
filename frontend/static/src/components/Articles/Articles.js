@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import ArticleDisplay from "./ArticleDisplay";
 import ArticleList from "./ArticleList";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 
 function Articles() {
   const [articles, setArticles] = useState([]);
@@ -33,43 +33,31 @@ function Articles() {
     setActiveArticle(articleAtIndex);
   };
 
-
-  // const filteredArticles = articles
-  // .filter((article) => (filter ? article.category == filter : article))
+  // const filteredArticles = articles.filter((article) =>
+  //   filter ? article.category == filter : article
+  // );
 
   // const changeFilter = (value) => {
-  //   setFilter(value)
-  //   setActiveArticle(filteredArticles[0])
-  // }
+  //   setFilter(value);
+  //   setActiveArticle(filteredArticles[0]);
+  // };
 
   return (
     <div>
-      <Button 
-            variant="outline-dark" 
-            value='GR' 
-            onClick={(e) => setFilter(e.target.value)}>
-              General
+      <Button variant="outline-dark" value="GR" onClick={(e) => setFilter(e.target.value)}>
+        General
       </Button>
-      <Button 
-            variant="outline-dark" 
-            value='SP' 
-            onClick={(e) => setFilter(e.target.value)}>
-              Sports
+      <Button variant="outline-dark" value="SP" onClick={(e) => setFilter(e.target.value)}>
+        Sports
       </Button>
-      <Button 
-            variant="outline-dark" 
-            value='GM' 
-            onClick={(e) => setFilter(e.target.value)}>
-              Gaming
+      <Button variant="outline-dark" value="GM" onClick={(e) => setFilter(e.target.value)}>
+        Gaming
       </Button>
-      <Button 
-            variant="outline-dark" 
-            value='FD' 
-            onClick={(e) => setFilter(e.target.value)}>
-              Food
+      <Button variant="outline-dark" value="FD" onClick={(e) => setFilter(e.target.value)}>
+        Food
       </Button>
       <aside>
-        <ArticleList articles={articles} updateDisplay={updateDisplay} filter={filter}/>
+        <ArticleList articles={articles} updateDisplay={updateDisplay} filter={filter} />
       </aside>
       {activeArticle && <ArticleDisplay activeArticle={activeArticle} />}
     </div>

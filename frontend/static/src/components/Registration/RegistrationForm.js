@@ -2,14 +2,18 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+///
+import { useNavigate } from "react-router-dom";
 
-function RegistrationForm() {
+function RegistrationForm({ superState, setSuperState }) {
   const [user, setUser] = useState({
     username: "",
     email: "",
     password1: "",
     password2: "",
   });
+
+  const navigate = useNavigate();
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -48,11 +52,14 @@ function RegistrationForm() {
     } else {
       const data = await response.json();
       Cookies.set("Authorization", `Token ${data.key}`);
+      navigate("/profile");
+      setSuperState({ ...superState, auth: true, admin: data.is_superuser, authorID: data.id });
     }
   };
 
   return (
     <Form onSubmit={checkSamePass}>
+      <h1>Register</h1>
       <Form.Group className="mb-3" controlId="username">
         <Form.Label>Username</Form.Label>
         <Form.Control

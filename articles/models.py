@@ -1,3 +1,5 @@
+from email.policy import default
+from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.conf import settings
 
@@ -9,9 +11,8 @@ class Article(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
     title = models.CharField(max_length=225)
     body = models.TextField()
-    # created_at = models.DateTimeField(auto_now_add=True)
-    # updated_at = models.DateTimeField(auto_now=True)
-    is_published = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
 
     GENERAL = 'GR'
     SPORTS = 'SP'
@@ -27,6 +28,22 @@ class Article(models.Model):
         max_length=2,
         choices=CATEGORY_CHOICES,
         default=GENERAL,
+    )
+
+    DRAFT = 'DR'
+    PUBLISHED = 'PB'
+    SUBMITTED = 'SM'
+    REJECTED = 'RJ'
+    STATUS_OF_ARTICLE = [
+        (DRAFT, 'Draft'),
+        (PUBLISHED, 'Published'),
+        (SUBMITTED, 'Submitted'),
+        (REJECTED, 'Rejected'),
+    ]
+    status = models.CharField(
+        max_length=2,
+        choices=CATEGORY_CHOICES,
+        default=DRAFT,
     )
 
     def __str__(self):
