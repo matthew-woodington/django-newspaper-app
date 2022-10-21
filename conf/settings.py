@@ -167,3 +167,9 @@ REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend/static')
 SITE_ID = 1
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Token Serializer
+
+REST_AUTH_SERIALIZERS = {
+    'TOKEN_SERIALIZER': 'accounts.serializers.TokenSerializer',
+}

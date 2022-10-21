@@ -1,3 +1,4 @@
+import '../../styles/Article.css'
 import { useState, useCallback, useEffect } from "react";
 import ArticleDisplay from "./ArticleDisplay";
 import ArticleList from "./ArticleList";
@@ -33,33 +34,42 @@ function Articles() {
     setActiveArticle(articleAtIndex);
   };
 
-  // const filteredArticles = articles.filter((article) =>
-  //   filter ? article.category == filter : article
-  // );
+  const filteredArticles = articles.filter((article) =>
+    filter ? article.category == filter : article
+  );
 
-  // const changeFilter = (value) => {
-  //   setFilter(value);
-  //   setActiveArticle(filteredArticles[0]);
-  // };
+  const changeCategory = (value) => {
+    setFilter(value)
+    window.scrollTo({ top: 0, behavior: 'smooth'})
+  }
+
+  useEffect(() => {
+    setActiveArticle(filteredArticles[0])
+  }, [filter])
+
 
   return (
-    <div>
-      <Button variant="outline-dark" value="GR" onClick={(e) => setFilter(e.target.value)}>
-        General
-      </Button>
-      <Button variant="outline-dark" value="SP" onClick={(e) => setFilter(e.target.value)}>
-        Sports
-      </Button>
-      <Button variant="outline-dark" value="GM" onClick={(e) => setFilter(e.target.value)}>
-        Gaming
-      </Button>
-      <Button variant="outline-dark" value="FD" onClick={(e) => setFilter(e.target.value)}>
-        Food
-      </Button>
-      <aside>
-        <ArticleList articles={articles} updateDisplay={updateDisplay} filter={filter} />
-      </aside>
-      {activeArticle && <ArticleDisplay activeArticle={activeArticle} />}
+    <div className='display'>
+      <section className="sort-buttons">
+        <Button className='sort-button' variant="outline-dark" value="GR" onClick={(e) => changeCategory(e.target.value)}>
+          General
+        </Button>
+        <Button className='sort-button' variant="outline-dark" value="SP" onClick={(e) => changeCategory(e.target.value)}>
+          Sports
+        </Button>
+        <Button className='sort-button' variant="outline-dark" value="GM" onClick={(e) => changeCategory(e.target.value)}>
+          Gaming
+        </Button>
+        <Button className='sort-button' variant="outline-dark" value="FD" onClick={(e) => changeCategory(e.target.value)}>
+          Food
+        </Button>
+      </section>
+      <section className="main-display">
+        {activeArticle && <ArticleDisplay activeArticle={activeArticle} />}
+        <aside className='sidebar'>
+          <ArticleList articles={articles} updateDisplay={updateDisplay} filteredArticles={filteredArticles} />
+        </aside>
+      </section>
     </div>
   );
 }

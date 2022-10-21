@@ -11,6 +11,7 @@ class Article(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
     title = models.CharField(max_length=225)
     body = models.TextField()
+    image = models.ImageField(upload_to='articles/', null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
@@ -42,7 +43,7 @@ class Article(models.Model):
     ]
     status = models.CharField(
         max_length=2,
-        choices=CATEGORY_CHOICES,
+        choices=STATUS_OF_ARTICLE,
         default=DRAFT,
     )
 

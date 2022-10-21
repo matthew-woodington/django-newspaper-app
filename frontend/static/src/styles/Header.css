@@ -1,0 +1,36 @@
+.app-logo {
+    font-family: 'Alfa Slab One', Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tag-line {
+    font-family: 'Alfa Slab One', Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+.mobile-nav {
+    width: 100%;
+    display: none;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+}
+
+@media(max-width: 992px) {
+    .desk-nav {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 80px;
+    }
+}
