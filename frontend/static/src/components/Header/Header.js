@@ -12,12 +12,11 @@ function Header({ superState, logoutUser }) {
             BRO. News Co.
           </Navbar.Brand>
           <div className="desk-nav">
-            {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
-            {/* <Navbar.Collapse id="basic-navbar-nav"> */}
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
               {superState.auth ? (
                 <>
+                  <Nav.Link href="articles/user">My Articles</Nav.Link>
                   <Nav.Link href="/" onClick={logoutUser}>
                     Logout
                   </Nav.Link>
@@ -27,9 +26,7 @@ function Header({ superState, logoutUser }) {
                   <Nav.Link href="/login">Login</Nav.Link>
                 </>
               )}
-              {/* <Nav.Link href="/register/">Register</Nav.Link> */}
             </Nav>
-            {/* </Navbar.Collapse> */}
           </div>
         </Container>
       </Navbar>
@@ -39,6 +36,7 @@ function Header({ superState, logoutUser }) {
         <Nav.Link href="/">Home</Nav.Link>
         {superState.auth ? (
           <>
+            <Nav.Link href="articles/user">My Articles</Nav.Link>
             <Nav.Link href="/" onClick={logoutUser}>
               Logout
             </Nav.Link>

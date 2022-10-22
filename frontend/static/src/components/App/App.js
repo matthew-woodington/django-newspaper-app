@@ -8,6 +8,7 @@ import RegistrationForm from "../Registration/RegistrationForm";
 import ProfileForm from "../Profile/ProfileForm";
 import Articles from "../Articles/Articles";
 import Header from "../Header/Header";
+import AuthorArticleList from "../Articles/AuthorArticleList";
 
 const INITIAL_STATE = {
   auth: false,
@@ -81,6 +82,7 @@ function App() {
               element={<RegistrationForm superState={superState} setSuperState={setSuperState} />}
             />
             <Route path="profile" element={<ProfileForm />} />
+            <Route path="articles/user" element={<AuthorArticleList />} />
           </Route>
         </Routes>
       </BrowserRouter>
