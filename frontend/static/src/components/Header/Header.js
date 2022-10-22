@@ -16,6 +16,7 @@ function Header({ superState, logoutUser }) {
               <Nav.Link href="/">Home</Nav.Link>
               {superState.auth ? (
                 <>
+                  <Nav.Link href="create">Create Article</Nav.Link>
                   <Nav.Link href="articles/user">My Articles</Nav.Link>
                   <Nav.Link href="/" onClick={logoutUser}>
                     Logout

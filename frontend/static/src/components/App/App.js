@@ -9,6 +9,8 @@ import ProfileForm from "../Profile/ProfileForm";
 import Articles from "../Articles/Articles";
 import Header from "../Header/Header";
 import AuthorArticleList from "../Articles/AuthorArticleList";
+import UserDetailView from "../Articles/UserDetailView";
+import CreateArticle from "../Articles/CreateArticle";
 
 const INITIAL_STATE = {
   auth: false,
@@ -18,6 +20,7 @@ const INITIAL_STATE = {
 
 function App() {
   const [superState, setSuperState] = useState(INITIAL_STATE);
+  const [activeID, setActiveID] = useState(null);
 
   const newState = JSON.parse(window.localStorage.getItem("superState"));
 
@@ -82,7 +85,12 @@ function App() {
               element={<RegistrationForm superState={superState} setSuperState={setSuperState} />}
             />
             <Route path="profile" element={<ProfileForm />} />
-            <Route path="articles/user" element={<AuthorArticleList />} />
+            <Route path="create" element={<CreateArticle />} />
+            <Route
+              path="articles/user/*"
+              element={<AuthorArticleList setActiveID={setActiveID} />}
+            />
+            <Route path="edit" element={<UserDetailView activeID={activeID} />} />
           </Route>
         </Routes>
       </BrowserRouter>
