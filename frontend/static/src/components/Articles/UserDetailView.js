@@ -1,33 +1,78 @@
-import { useState, useCallback, useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { useState } from "react";
 
-function UserDetailView(activeID) {
-  const [article, setArticle] = useState();
+function UserDetailView({ activeArticle }) {
+  const [isEdit, setIsEdit] = useState(false);
+  const [state, setState] = useState({
+    image: activeArticle.image,
+    title: activeArticle.title,
+    body: activeArticle.body,
+    category: activeArticle.category,
+  });
 
-  const handleError = (err) => {
-    console.warn(err);
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
-  const getArticle = useCallback(async () => {
-    const response = await fetch(`/api/v1/articles/${activeID}`).catch(handleError);
-    if (!response.ok) {
-      throw new Error("Network response was not OK");
-    } else {
-      const data = await response.json();
-      setArticle(data);
-    }
-  }, []);
-
-  useEffect(() => {
-    getArticle();
-  }, [getArticle]);
-
-  return (
-    <article className="highlight-article">
-      {/* <img className="highlight-img" src={article.image} alt="news article image" />
-      <h2 className="highlight-title">{article.title}</h2>
-      <p className="highlight-body">{article.body}</p> */}
-    </article>
+  const nonEditHTML = (
+    <>
+      <img className="highlight-img" src={activeArticle.image} alt="news article image" />
+      <h2 className="highlight-title">{activeArticle.title}</h2>
+      <p className="highlight-body">{activeArticle.body}</p>
+      {activeArticle.status === "DR" && (
+        <>
+          <Button>Submit</Button>
+          <Button onClick={() => setIsEdit(true)}>Edit</Button>
+        </>
+      )}
+    </>
   );
+
+  const editHTML = (
+    <>
+      <img className="highlight-img" src={activeArticle.image} alt="news article image" />
+      <Form>
+        <Form.Group className="mb-3" controlId="title">
+          <Form.Label>Article Title</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Title"
+            name="title"
+            value={state.title}
+            onChange={handleInput}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="body">
+          <Form.Label>Article Body</Form.Label>
+          <textarea
+            rows="3"
+            class="form-control"
+            placeholder="Body..."
+            name="body"
+            value={state.body}
+            onChange={handleInput}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="category">
+          <Form.Label>Choose Category</Form.Label>
+          <Form.Select name="category" value={state.category} onChange={handleInput}>
+            <option value="GR">General</option>
+            <option value="SP">Sports</option>
+            <option value="GM">Gaming</option>
+            <option value="FD">Food</option>
+          </Form.Select>
+        </Form.Group>
+      </Form>
+      <Button>Save</Button>
+    </>
+  );
+
+  return <article className="highlight-article">{isEdit ? editHTML : nonEditHTML}</article>;
 }
 
 export default UserDetailView;

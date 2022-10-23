@@ -90,7 +90,6 @@ function App() {
               path="articles/user/*"
               element={<AuthorArticleList setActiveID={setActiveID} />}
             />
-            <Route path="edit" element={<UserDetailView activeID={activeID} />} />
           </Route>
         </Routes>
       </BrowserRouter>

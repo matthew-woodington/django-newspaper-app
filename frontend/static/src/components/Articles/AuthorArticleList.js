@@ -1,13 +1,12 @@
 import "../../styles/Article.css";
 import { useState, useCallback, useEffect } from "react";
 import Button from "react-bootstrap/Button";
-// import { useNavigate } from "react-router-dom";
+import UserDetailView from "./UserDetailView";
 
-function AuthorArticleList({ setActiveID }) {
+function AuthorArticleList() {
   const [userArticles, setUserArticles] = useState([]);
-  const [filter, setFilter] = useState("PB");
-
-  //   const navigate = useNavigate();
+  const [activeArticle, setActiveArticle] = useState();
+  const [filter, setFilter] = useState("DR");
 
   const handleError = (err) => {
     console.warn(err);
@@ -20,17 +19,13 @@ function AuthorArticleList({ setActiveID }) {
     } else {
       const data = await response.json();
       setUserArticles(data);
+      setActiveArticle(data[0]);
     }
   }, []);
 
   useEffect(() => {
     getUserArticles();
   }, [getUserArticles]);
-
-  const viewArticle = (id) => {
-    setActiveID(id);
-    // navigate("/edit");
-  };
 
   const filteredArticles = userArticles
     .filter((article) => (filter ? article.status == filter : article))
@@ -52,26 +47,16 @@ function AuthorArticleList({ setActiveID }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const viewArticle = (id) => {
+    const index = userArticles.findIndex((article) => article.id === id);
+    const articleAtIndex = userArticles[index];
+    setActiveArticle(articleAtIndex);
+  };
+
   return (
     <>
       <div className="display">
         <section className="sort-buttons">
-          <Button
-            className="sort-button"
-            variant="outline-dark"
-            value="PB"
-            onClick={(e) => changeCategory(e.target.value)}
-          >
-            Published
-          </Button>
-          <Button
-            className="sort-button"
-            variant="outline-dark"
-            value="SM"
-            onClick={(e) => changeCategory(e.target.value)}
-          >
-            Submitted
-          </Button>
           <Button
             className="sort-button"
             variant="outline-dark"
@@ -83,14 +68,17 @@ function AuthorArticleList({ setActiveID }) {
           <Button
             className="sort-button"
             variant="outline-dark"
-            value="RJ"
+            value="SM"
             onClick={(e) => changeCategory(e.target.value)}
           >
-            Rejected
+            Submitted
           </Button>
         </section>
         <section>
-          <ul>{filteredArticles}</ul>
+          <article>{activeArticle && <UserDetailView activeArticle={activeArticle} />}</article>
+          <aside>
+            <ul>{filteredArticles}</ul>
+          </aside>
         </section>
       </div>
     </>
