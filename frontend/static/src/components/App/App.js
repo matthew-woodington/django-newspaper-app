@@ -86,6 +86,7 @@ function App() {
             />
             <Route path="profile" element={<ProfileForm />} />
             <Route path="create" element={<CreateArticle />} />
+            <Route path="article/:id/*" element={<UserDetailView />} />
             <Route
               path="articles/user/*"
               element={<AuthorArticleList setActiveID={setActiveID} />}
