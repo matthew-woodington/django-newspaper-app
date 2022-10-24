@@ -14,18 +14,26 @@ function Header({ superState, logoutUser }) {
           <div className="desk-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
-              {superState.auth ? (
-                <>
-                  <Nav.Link href="create">Create Article</Nav.Link>
-                  <Nav.Link href="articles/user">My Articles</Nav.Link>
-                  <Nav.Link href="/" onClick={logoutUser}>
-                    Logout
-                  </Nav.Link>
-                </>
-              ) : (
+              {!superState.auth && (
                 <>
                   <Nav.Link href="/login">Login</Nav.Link>
                 </>
+              )}
+              {superState.auth && !superState.admin && (
+                <>
+                  <Nav.Link href="create">Create Article</Nav.Link>
+                  <Nav.Link href="articles/user">My Articles</Nav.Link>
+                </>
+              )}
+              {superState.admin && (
+                <>
+                  <Nav.Link href="articles/admin">Review Articles</Nav.Link>
+                </>
+              )}
+              {superState.auth && (
+                <Nav.Link href="/" onClick={logoutUser}>
+                  Logout
+                </Nav.Link>
               )}
             </Nav>
           </div>
@@ -35,18 +43,26 @@ function Header({ superState, logoutUser }) {
 
       <Nav className="me-auto mobile-nav">
         <Nav.Link href="/">Home</Nav.Link>
-        {superState.auth ? (
-          <>
-            <Nav.Link href="create">Create Article</Nav.Link>
-            <Nav.Link href="articles/user">My Articles</Nav.Link>
-            <Nav.Link href="/" onClick={logoutUser}>
-              Logout
-            </Nav.Link>
-          </>
-        ) : (
+        {!superState.auth && (
           <>
             <Nav.Link href="/login">Login</Nav.Link>
           </>
+        )}
+        {superState.auth && !superState.admin && (
+          <>
+            <Nav.Link href="create">Create Article</Nav.Link>
+            <Nav.Link href="articles/user">My Articles</Nav.Link>
+          </>
+        )}
+        {superState.admin && (
+          <>
+            <Nav.Link href="articles/admin">Review Articles</Nav.Link>
+          </>
+        )}
+        {superState.auth && (
+          <Nav.Link href="/" onClick={logoutUser}>
+            Logout
+          </Nav.Link>
         )}
       </Nav>
     </>

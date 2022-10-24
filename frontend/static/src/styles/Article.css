@@ -40,6 +40,15 @@
     margin-bottom: 20px;
 }
 
+.highlight-title {
+    font-family: 'Alfa Slab One', Arial, Helvetica, sans-serif;
+}
+
+.highlight-body {
+    padding: 30px;
+    text-align: left;
+}
+
 .sidebar {
     width: 35%;
 }

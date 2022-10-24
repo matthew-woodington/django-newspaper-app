@@ -1,4 +1,4 @@
-import '../../styles/Article.css'
+import "../../styles/Article.css";
 import { useState, useCallback, useEffect } from "react";
 import ArticleDisplay from "./ArticleDisplay";
 import ArticleList from "./ArticleList";
@@ -39,35 +39,58 @@ function Articles() {
   );
 
   const changeCategory = (value) => {
-    setFilter(value)
-    window.scrollTo({ top: 0, behavior: 'smooth'})
-  }
+    setFilter(value);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   useEffect(() => {
-    setActiveArticle(filteredArticles[0])
-  }, [filter])
-
+    setActiveArticle(filteredArticles[0]);
+  }, [filter]);
 
   return (
-    <div className='display'>
+    <div className="display">
       <section className="sort-buttons">
-        <Button className='sort-button' variant="outline-dark" value="GR" onClick={(e) => changeCategory(e.target.value)}>
+        <Button
+          className="sort-button"
+          variant="outline-dark"
+          value="GR"
+          onClick={(e) => changeCategory(e.target.value)}
+        >
           General
         </Button>
-        <Button className='sort-button' variant="outline-dark" value="SP" onClick={(e) => changeCategory(e.target.value)}>
+        <Button
+          className="sort-button"
+          variant="outline-dark"
+          value="SP"
+          onClick={(e) => changeCategory(e.target.value)}
+        >
           Sports
         </Button>
-        <Button className='sort-button' variant="outline-dark" value="GM" onClick={(e) => changeCategory(e.target.value)}>
+        <Button
+          className="sort-button"
+          variant="outline-dark"
+          value="GM"
+          onClick={(e) => changeCategory(e.target.value)}
+        >
           Gaming
         </Button>
-        <Button className='sort-button' variant="outline-dark" value="FD" onClick={(e) => changeCategory(e.target.value)}>
+        <Button
+          className="sort-button"
+          variant="outline-dark"
+          value="FD"
+          onClick={(e) => changeCategory(e.target.value)}
+        >
           Food
         </Button>
       </section>
       <section className="main-display">
         {activeArticle && <ArticleDisplay activeArticle={activeArticle} />}
-        <aside className='sidebar'>
-          <ArticleList articles={articles} updateDisplay={updateDisplay} filteredArticles={filteredArticles} />
+        <aside className="sidebar">
+          <ArticleList
+            articles={articles}
+            updateDisplay={updateDisplay}
+            filteredArticles={filteredArticles}
+          />
         </aside>
       </section>
     </div>

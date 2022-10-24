@@ -1,12 +1,24 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 function EditArticle({ state }) {
   const [isEdit, setIsEdit] = useState(false);
   const [article, setArticle] = useState({
-    ...state,
+    image: state.image,
+    title: state.title,
+    body: state.body,
+    category: state.category,
+    status: state.status,
   });
+
+  const navigate = useNavigate();
+
+  const handleError = (err) => {
+    console.warn(err);
+  };
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -16,6 +28,44 @@ function EditArticle({ state }) {
     }));
   };
 
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    setArticle({
+      ...state,
+      image: file,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    if (article.image instanceof File) {
+      formData.append("image", article.image);
+    }
+
+    formData.append("title", article.title);
+    formData.append("body", article.body);
+    formData.append("category", article.category);
+    formData.append("status", e.target.value);
+
+    const options = {
+      method: "PUT",
+      headers: {
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+      body: formData,
+    };
+
+    const response = await fetch(`/api/v1/articles/${state.id}/`, options).catch(handleError);
+    if (!response.ok) {
+      throw new Error("Network response was not OK");
+    } else {
+      const data = await response.json();
+      console.log(data);
+      navigate("/");
+    }
+  };
+
   const nonEditHTML = (
     <>
       <img className="highlight-img" src={state.image} alt="news article image" />
@@ -23,8 +73,12 @@ function EditArticle({ state }) {
       <p className="highlight-body">{state.body}</p>
       {state.status === "DR" && (
         <>
-          <Button>Submit</Button>
-          <Button onClick={() => setIsEdit(true)}>Edit</Button>
+          <Button variant="dark" type="submit" value="SM" onClick={(e) => handleSubmit(e)}>
+            Submit
+          </Button>
+          <Button variant="dark" type="button" onClick={() => setIsEdit(true)}>
+            Edit
+          </Button>
         </>
       )}
     </>
@@ -32,8 +86,8 @@ function EditArticle({ state }) {
 
   const editHTML = (
     <>
-      <img className="highlight-img" src={article.image} alt="news article image" />
       <Form>
+        <input type="file" class="form-control-file" name="image" onChange={handleImage} />
         <Form.Group className="mb-3" controlId="title">
           <Form.Label>Article Title</Form.Label>
           <Form.Control
@@ -48,7 +102,6 @@ function EditArticle({ state }) {
           <Form.Label>Article Body</Form.Label>
           <textarea
             rows="3"
-            class="form-control"
             placeholder="Body..."
             name="body"
             value={article.body}
@@ -65,7 +118,12 @@ function EditArticle({ state }) {
           </Form.Select>
         </Form.Group>
       </Form>
-      <Button>Save</Button>
+      <Button variant="dark" type="submit" value="SM" onClick={(e) => handleSubmit(e)}>
+        Save and Submit
+      </Button>
+      <Button variant="dark" type="submit" value="DR" onClick={(e) => handleSubmit(e)}>
+        Save as Draft
+      </Button>
     </>
   );
 

@@ -3,7 +3,7 @@ from articles import models
 from . import models
 from . import serializers
 from .permissions import IsAuthorOrReadOnly
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 
 # Create your views here.
 
@@ -31,6 +31,18 @@ class AuthorArticleListAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return models.Article.objects.filter(author=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+
+class AdminArticleListAPIView(generics.ListCreateAPIView):
+    permission_classes = (IsAdminUser,)
+    queryset = models.Article.objects.order_by('-created_at')
+    serializer_class = serializers.ArticleSerializer
+
+    def get_queryset(self):
+        return models.Article.objects.filter(status='SM')
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)

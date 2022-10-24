@@ -11,6 +11,8 @@ import Header from "../Header/Header";
 import AuthorArticleList from "../Articles/AuthorArticleList";
 import UserDetailView from "../Articles/UserDetailView";
 import CreateArticle from "../Articles/CreateArticle";
+import AdminArticleList from "../Articles/AdminArticleList";
+import AdminReview from "../Articles/AdminReview";
 
 const INITIAL_STATE = {
   auth: false,
@@ -87,10 +89,9 @@ function App() {
             <Route path="profile" element={<ProfileForm />} />
             <Route path="create" element={<CreateArticle />} />
             <Route path="article/:id/*" element={<UserDetailView />} />
-            <Route
-              path="articles/user/*"
-              element={<AuthorArticleList setActiveID={setActiveID} />}
-            />
+            <Route path="articles/user/*" element={<AuthorArticleList />} />
+            <Route path="articles/admin" element={<AdminArticleList />} />
+            <Route path="articles/admin/:id/*" element={<AdminReview />} />
           </Route>
         </Routes>
       </BrowserRouter>
