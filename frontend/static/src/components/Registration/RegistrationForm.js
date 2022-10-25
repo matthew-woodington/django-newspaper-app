@@ -1,3 +1,4 @@
+import "../../styles/Form.css";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import Button from "react-bootstrap/Button";
@@ -58,51 +59,55 @@ function RegistrationForm({ superState, setSuperState }) {
   };
 
   return (
-    <Form onSubmit={checkSamePass}>
-      <h1>Register</h1>
-      <Form.Group className="mb-3" controlId="username">
-        <Form.Label>Username</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter username"
-          name="username"
-          value={user.username}
-          onChange={handleInput}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="email">
-        <Form.Label>Email Address</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          name="email"
-          value={user.email}
-          onChange={handleInput}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="password1">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Enter password"
-          name="password1"
-          value={user.password1}
-          onChange={handleInput}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="password2">
-        <Form.Control
-          type="password"
-          placeholder="Enter password again"
-          name="password2"
-          value={user.password2}
-          onChange={handleInput}
-        />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Register
-      </Button>
-    </Form>
+    <div className="main-display-area">
+      <Form className="form" onSubmit={checkSamePass}>
+        <h1 className="form-title">Register</h1>
+        <Form.Group className="mb-3" controlId="username">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter username"
+            name="username"
+            value={user.username}
+            onChange={handleInput}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Email Address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            value={user.email}
+            onChange={handleInput}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="password1">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Enter password"
+            name="password1"
+            value={user.password1}
+            onChange={handleInput}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="password2">
+          <Form.Control
+            type="password"
+            placeholder="Enter password again"
+            name="password2"
+            value={user.password2}
+            onChange={handleInput}
+          />
+        </Form.Group>
+        <div className="form-footer">
+          <Button variant="dark" type="submit">
+            Register
+          </Button>
+        </div>
+      </Form>
+    </div>
   );
 }
 

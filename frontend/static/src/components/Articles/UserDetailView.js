@@ -25,7 +25,7 @@ function UserDetailView() {
     getArticle(id);
   }, []);
 
-  return <article className="highlight-article">{state && <EditArticle state={state} />}</article>;
+  return <article className="detail-view">{state && <EditArticle state={state} />}</article>;
 }
 
 export default UserDetailView;

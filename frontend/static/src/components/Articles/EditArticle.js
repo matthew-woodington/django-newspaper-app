@@ -62,7 +62,7 @@ function EditArticle({ state }) {
     } else {
       const data = await response.json();
       console.log(data);
-      navigate("/");
+      navigate("/articles/user/*");
     }
   };
 
@@ -73,10 +73,21 @@ function EditArticle({ state }) {
       <p className="highlight-body">{state.body}</p>
       {state.status === "DR" && (
         <>
-          <Button variant="dark" type="submit" value="SM" onClick={(e) => handleSubmit(e)}>
+          <Button
+            className="form-button-pairs"
+            variant="dark"
+            type="submit"
+            value="SM"
+            onClick={(e) => handleSubmit(e)}
+          >
             Submit
           </Button>
-          <Button variant="dark" type="button" onClick={() => setIsEdit(true)}>
+          <Button
+            className="form-button-pairs"
+            variant="dark"
+            type="button"
+            onClick={() => setIsEdit(true)}
+          >
             Edit
           </Button>
         </>
@@ -85,9 +96,18 @@ function EditArticle({ state }) {
   );
 
   const editHTML = (
-    <>
-      <Form>
-        <input type="file" class="form-control-file" name="image" onChange={handleImage} />
+    <div className="main-display-area">
+      <Form className="form">
+        <Form.Group className="mb-3" controlId="image">
+          <Form.Label>Article Image</Form.Label>
+          <Form.Control
+            type="file"
+            className="form-control-file"
+            name="image"
+            onChange={handleImage}
+          />
+        </Form.Group>
+        {/* <input type="file" className="form-control-file" name="image" onChange={handleImage} /> */}
         <Form.Group className="mb-3" controlId="title">
           <Form.Label>Article Title</Form.Label>
           <Form.Control
@@ -102,6 +122,7 @@ function EditArticle({ state }) {
           <Form.Label>Article Body</Form.Label>
           <textarea
             rows="3"
+            className="form-control"
             placeholder="Body..."
             name="body"
             value={article.body}
@@ -117,17 +138,31 @@ function EditArticle({ state }) {
             <option value="FD">Food</option>
           </Form.Select>
         </Form.Group>
+        <div className="edit-form-footer">
+          <Button
+            className="form-button-edit"
+            variant="dark"
+            type="submit"
+            value="SM"
+            onClick={(e) => handleSubmit(e)}
+          >
+            Save and Submit
+          </Button>
+          <Button
+            className="form-button-edit"
+            variant="dark"
+            type="submit"
+            value="DR"
+            onClick={(e) => handleSubmit(e)}
+          >
+            Save as Draft
+          </Button>
+        </div>
       </Form>
-      <Button variant="dark" type="submit" value="SM" onClick={(e) => handleSubmit(e)}>
-        Save and Submit
-      </Button>
-      <Button variant="dark" type="submit" value="DR" onClick={(e) => handleSubmit(e)}>
-        Save as Draft
-      </Button>
-    </>
+    </div>
   );
 
-  return <>{isEdit ? editHTML : nonEditHTML}</>;
+  return <div className="article-view">{isEdit ? editHTML : nonEditHTML}</div>;
 }
 
 export default EditArticle;
