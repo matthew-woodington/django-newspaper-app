@@ -14,6 +14,7 @@ class Article(models.Model):
     image = models.ImageField(upload_to='articles/', null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+    is_highlighted = models.BooleanField(default=False)
 
     GENERAL = 'GR'
     SPORTS = 'SP'
