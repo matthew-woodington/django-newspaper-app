@@ -45,7 +45,13 @@ function LoginForm({ superState, setSuperState }) {
       Cookies.set("Authorization", `Token ${data.key}`);
       console.log(data);
       navigate("/");
-      setSuperState({ ...superState, auth: true, admin: data.is_superuser, authorID: data.id });
+      setSuperState({
+        ...superState,
+        auth: true,
+        admin: data.is_superuser,
+        authorID: data.id,
+        avatar: data.avatar,
+      });
     }
   };
 

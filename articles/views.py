@@ -2,6 +2,7 @@ from rest_framework import generics
 from articles import models
 from . import models
 from . import serializers
+from django.db.models import Q
 from .permissions import IsAuthorOrReadOnly
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 
@@ -42,7 +43,7 @@ class AdminArticleListAPIView(generics.ListCreateAPIView):
     serializer_class = serializers.ArticleSerializer
 
     def get_queryset(self):
-        return models.Article.objects.filter(status='SM')
+        return models.Article.objects.filter(Q(status='PB') | Q(status='SM') | Q(status='AR'))
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)

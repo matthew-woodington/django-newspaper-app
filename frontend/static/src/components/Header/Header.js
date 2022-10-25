@@ -2,8 +2,16 @@ import "../../styles/Header.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { useNavigate } from "react-router-dom";
 
 function Header({ superState, logoutUser }) {
+  const navigate = useNavigate();
+
+  const logout = (e) => {
+    logoutUser(e);
+    navigate("/");
+  };
+
   return (
     <>
       <Navbar expand="lg" className="header">
@@ -12,7 +20,7 @@ function Header({ superState, logoutUser }) {
             BRO. News Co.
           </Navbar.Brand>
           <div className="desk-nav">
-            <Nav className="me-auto">
+            <Nav className="me-auto desk-nav-links">
               {!superState.auth && (
                 <>
                   <Nav.Link href="/login">Login</Nav.Link>
@@ -30,11 +38,14 @@ function Header({ superState, logoutUser }) {
                 </>
               )}
               {superState.auth && (
-                <Nav.Link href="/" onClick={logoutUser}>
+                <Nav.Link href="/" onClick={(e) => logout(e)}>
                   Logout
                 </Nav.Link>
               )}
             </Nav>
+            {superState.avatar && (
+              <img className="profile-picture" src={superState.avatar} alt="profile picture" />
+            )}
           </div>
         </Container>
       </Navbar>
@@ -43,7 +54,7 @@ function Header({ superState, logoutUser }) {
       <Nav className="me-auto mobile-nav">
         {!superState.auth && (
           <>
-            <Nav.Link className="foooter-link" href="/login">
+            <Nav.Link className="footer-link" href="/login">
               Login
             </Nav.Link>
           </>
@@ -66,7 +77,7 @@ function Header({ superState, logoutUser }) {
           </>
         )}
         {superState.auth && (
-          <Nav.Link className="footer-link" href="/" onClick={logoutUser}>
+          <Nav.Link className="footer-link" href="/" onClick={(e) => logout(e)}>
             Logout
           </Nav.Link>
         )}

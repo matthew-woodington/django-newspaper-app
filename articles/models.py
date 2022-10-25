@@ -35,11 +35,13 @@ class Article(models.Model):
     PUBLISHED = 'PB'
     SUBMITTED = 'SM'
     REJECTED = 'RJ'
+    ARCHIVED = 'AR'
     STATUS_OF_ARTICLE = [
         (DRAFT, 'Draft'),
         (PUBLISHED, 'Published'),
         (SUBMITTED, 'Submitted'),
         (REJECTED, 'Rejected'),
+        (ARCHIVED, 'Archived'),
     ]
     status = models.CharField(
         max_length=2,

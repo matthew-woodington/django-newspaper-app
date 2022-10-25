@@ -9,7 +9,7 @@ function ArticleList({ updateDisplay, filteredArticles }) {
           <h3 className="aside-title">{article.title}</h3>
           <span>By {article.author_name}</span>
         </div>
-        <img className="aside-image" src={article.image} />
+        <img className="main-aside-image" src={article.image} />
       </li>
     ));
   return <ul className="article-list">{articleList}</ul>;
