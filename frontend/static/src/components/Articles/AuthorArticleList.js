@@ -55,7 +55,7 @@ function AuthorArticleList() {
             Submitted
           </Button>
         </section>
-        <section className="author-article-list">
+        <section className="author-article-list margin-section">
           <ul className="list-container">{filteredArticles}</ul>
         </section>
       </div>

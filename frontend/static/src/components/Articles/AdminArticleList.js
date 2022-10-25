@@ -63,7 +63,7 @@ function AdminArticleList() {
             Archived
           </Button>
         </section>
-        <section className="author-article-list">
+        <section className="author-article-list margin-section">
           <ul className="list-container">{articleList}</ul>
         </section>
       </div>

@@ -32,6 +32,7 @@ function Articles() {
     const index = articles.findIndex((article) => article.id === id);
     const articleAtIndex = articles[index];
     setActiveArticle(articleAtIndex);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const filteredArticles = articles.filter((article) =>

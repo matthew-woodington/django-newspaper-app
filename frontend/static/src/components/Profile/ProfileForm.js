@@ -68,7 +68,7 @@ function ProfileForm() {
           </div>
         </section>
         <div className="form-footer">
-          <Button type="submit" variant="dark">
+          <Button className="form-button" type="submit" variant="dark">
             Save
           </Button>
         </div>

@@ -102,7 +102,7 @@ function RegistrationForm({ superState, setSuperState }) {
           />
         </Form.Group>
         <div className="form-footer">
-          <Button variant="dark" type="submit">
+          <Button className="form-button" variant="dark" type="submit">
             Register
           </Button>
         </div>
