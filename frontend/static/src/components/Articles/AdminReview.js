@@ -48,26 +48,68 @@ function AdminReview() {
     } else {
       const data = await response.json();
       console.log(data);
-      navigate("/");
+      navigate("/articles/admin");
     }
   };
 
   return (
-    <>
+    <article className="detail-view">
       {state && (
-        <>
+        <div className="article-view">
           <img className="highlight-img" src={state.image} alt="news article image" />
           <h2 className="highlight-title">{state.title}</h2>
           <p className="highlight-body">{state.body}</p>
-          <Button variant="dark" type="submit" value="PB" onClick={(e) => handleSubmit(e)}>
-            Publish
-          </Button>
-          <Button variant="dark" type="submit" value="RJ" onClick={(e) => handleSubmit(e)}>
-            Reject
-          </Button>
-        </>
+          {state.status === "SM" && (
+            <>
+              <Button
+                className="form-button-pairs"
+                variant="dark"
+                type="submit"
+                value="PB"
+                onClick={(e) => handleSubmit(e)}
+              >
+                Publish
+              </Button>
+              <Button
+                className="form-button-pairs"
+                variant="dark"
+                type="submit"
+                value="RJ"
+                onClick={(e) => handleSubmit(e)}
+              >
+                Reject
+              </Button>
+            </>
+          )}
+          {state.status === "PB" && (
+            <>
+              <Button
+                className="form-button-pairs"
+                variant="dark"
+                type="submit"
+                value="AR"
+                onClick={(e) => handleSubmit(e)}
+              >
+                Archive
+              </Button>
+            </>
+          )}
+          {state.status === "AR" && (
+            <>
+              <Button
+                className="form-button-pairs"
+                variant="dark"
+                type="submit"
+                value="PB"
+                onClick={(e) => handleSubmit(e)}
+              >
+                Re-Publish
+              </Button>
+            </>
+          )}
+        </div>
       )}
-    </>
+    </article>
   );
 }
 

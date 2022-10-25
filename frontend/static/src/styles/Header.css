@@ -50,9 +50,32 @@
     object-position: center;
 }
 
+.footer {
+    height: 80px;
+    width: 100%;
+    border-top: 1px solid #bbb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.end-tag {
+    font-family: 'Alfa Slab One', Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+.copyright {
+    font-size: 12px;
+}
+
 
 @media(max-width: 992px) {
     .desk-nav-links {
+        display: none;
+    }
+
+    .footer {
         display: none;
     }
 

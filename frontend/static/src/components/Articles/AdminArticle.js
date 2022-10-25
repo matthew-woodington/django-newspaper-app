@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Badge from "react-bootstrap/Badge";
+// import Button from "react-bootstrap/Button";
 
 function AdminArticle({ article }) {
   return (
@@ -9,21 +10,9 @@ function AdminArticle({ article }) {
         <span>By {article.author_name} | </span>
         <Badge bg="secondary">{article.status}</Badge>
         <div className="view-button">
-          {article.status === "PB" && (
-            <Link className="view-link" to={`/articles/admin/${article.id}`}>
-              Archive Article
-            </Link>
-          )}
-          {article.status === "SM" && (
-            <Link className="view-link" to={`/articles/admin/${article.id}`}>
-              View Article
-            </Link>
-          )}
-          {article.status === "AR" && (
-            <Link className="view-link" to={`/articles/admin/${article.id}`}>
-              Re-Publish
-            </Link>
-          )}
+          <Link className="view-link" to={`/articles/admin/${article.id}`}>
+            View Article
+          </Link>
         </div>
       </div>
       <img className="aside-image" src={article.image} />
