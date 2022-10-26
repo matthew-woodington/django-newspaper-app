@@ -3,14 +3,14 @@ from articles import models
 from . import models
 from . import serializers
 from django.db.models import Q
-from .permissions import IsAuthorOrReadOnly
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from .permissions import IsAdminOrReadOnly, IsAuthorOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 # Create your views here.
 
 
 class ArticleListAPIView(generics.ListCreateAPIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAdminOrReadOnly,)
     queryset = models.Article.objects.order_by('-created_at')
     serializer_class = serializers.ArticleSerializer
 
@@ -28,6 +28,7 @@ class ArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class AuthorArticleListAPIView(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated,)
     serializer_class = serializers.ArticleSerializer
 
     def get_queryset(self):
