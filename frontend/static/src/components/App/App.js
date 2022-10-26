@@ -14,6 +14,7 @@ import CreateArticle from "../Articles/CreateArticle";
 import AdminArticleList from "../Articles/AdminArticleList";
 import AdminReview from "../Articles/AdminReview";
 import Layout from "./Layout";
+import ErrorPage from "../404/404Page";
 
 const INITIAL_STATE = {
   auth: false,
@@ -103,6 +104,7 @@ function App() {
             <Route path="articles/admin" element={<AdminArticleList />} />
             <Route path="articles/admin/:id/*" element={<AdminReview />} />
           </Route>
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -89,3 +89,14 @@
         height: 80px;
     }
 }
+
+@media(max-width: 400px) {
+    .footer-link {
+        width: 100px;
+        height: 60px;
+        display: inline-flex;
+        align-items: center;
+        color: #212529;
+        border-radius: 5px;
+    }
+}
