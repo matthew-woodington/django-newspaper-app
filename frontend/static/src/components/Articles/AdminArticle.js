@@ -10,7 +10,7 @@ function AdminArticle({ article }) {
         <span>By {article.author_name} | </span>
         <Badge bg="secondary">{article.status}</Badge>
         <div className="view-button">
-          <Link className="view-link" to={`/articles/admin/${article.id}`}>
+          <Link className="view-link" to={`/articles/editor/${article.id}`}>
             View Article
           </Link>
         </div>
