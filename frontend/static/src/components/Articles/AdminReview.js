@@ -48,7 +48,7 @@ function AdminReview() {
     } else {
       const data = await response.json();
       console.log(data);
-      navigate("/articles/admin");
+      navigate("/articles/editor");
     }
   };
 

@@ -98,11 +98,20 @@ function App() {
               element={<RegistrationForm superState={superState} setSuperState={setSuperState} />}
             />
             <Route path="profile" element={<ProfileForm />} />
-            <Route path="create" element={<CreateArticle />} />
+            {superState.auth && (
+              <>
+                <Route path="create" element={<CreateArticle />} />
+                <Route path="article/:id/*" element={<UserDetailView />} />
+                <Route path="articles/user/*" element={<AuthorArticleList />} />
+                <Route path="articles/editor" element={<AdminArticleList />} />
+                <Route path="articles/editor/:id/*" element={<AdminReview />} />
+              </>
+            )}
+            {/* <Route path="create" element={<CreateArticle />} />
             <Route path="article/:id/*" element={<UserDetailView />} />
             <Route path="articles/user/*" element={<AuthorArticleList />} />
             <Route path="articles/admin" element={<AdminArticleList />} />
-            <Route path="articles/admin/:id/*" element={<AdminReview />} />
+            <Route path="articles/admin/:id/*" element={<AdminReview />} /> */}
           </Route>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
