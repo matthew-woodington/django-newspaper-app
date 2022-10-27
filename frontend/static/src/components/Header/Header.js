@@ -34,7 +34,7 @@ function Header({ superState, logoutUser }) {
               )}
               {superState.admin && (
                 <>
-                  <Nav.Link href="/articles/admin">Review Articles</Nav.Link>
+                  <Nav.Link href="/articles/editor">Review Articles</Nav.Link>
                 </>
               )}
               {superState.auth && (
@@ -71,7 +71,7 @@ function Header({ superState, logoutUser }) {
         )}
         {superState.admin && (
           <>
-            <Nav.Link className="footer-link" href="/articles/admin">
+            <Nav.Link className="footer-link" href="/articles/editor">
               Review Articles
             </Nav.Link>
           </>
