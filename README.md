@@ -10,3 +10,5 @@ The app can be used by any user to view and browse posted newspaper articles by 
 
 Login to the app as a creator/admin using the following information or create a new account and submit your own articles:
 
+- Creator: Matt / matt@example.com / safepass1
+- Admin: admin / admin@example.com / safepass1
